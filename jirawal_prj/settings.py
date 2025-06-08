@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'jirawal_prj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': config("DB_NAME"),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
-        'PORT': 3306
+        'PORT': 5433
     }
 }
 
@@ -136,6 +136,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Jira Configuration
-JIRA_SERVER = 'https://your-company.atlassian.net'  # Your Jira instance URL
-JIRA_USERNAME = 'your-email@example.com'  # Your Jira login email
-JIRA_API_TOKEN = 'your-api-token'  # Get this from https://id.atlassian.com/manage-profile/security/api-tokens
+#JIRA_SERVER = 'https://your-company.atlassian.net'  # Your Jira instance URL
+#JIRA_USERNAME = 'your-email@example.com'  # Your Jira login email
+#JIRA_API_TOKEN = 'your-api-token'  # Get this from https://id.atlassian.com/manage-profile/security/api-tokens
+
+JIRA_SERVER = config('JIRA_SERVER')
+JIRA_USERNAME = config('JIRA_USERNAME')
+JIRA_API_TOKEN = config('JIRA_API_TOKEN')
+

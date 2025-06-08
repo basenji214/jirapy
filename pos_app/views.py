@@ -16,7 +16,7 @@ def search_issues(request):
     from .jira_utils import get_jira_connection
     issues = []
     if request.method == 'POST':
-        jql = request.POST.get('jql','')n b 
+        jql = request.POST.get('jql','')
         if jql:
             jira = get_jira_connection()
             issues = jira.jql(jql)
