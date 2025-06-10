@@ -1,8 +1,7 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Search Jira Issues</h1>
 
+<h1>Search Jira Issues</h1>
 <form method="post">
     {% csrf_token %}
     <div class="form-group">
@@ -13,6 +12,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
+
+
 
 {% if issues %}
     <h2>Search Results</h2>
@@ -26,9 +27,17 @@
             </tr>
         </thead>
         <tbody>
-            {% for issue in issues %}
+            {% for issue in issues.issues %}
             <tr>
-                <td>{{ issue.key }}</td>
+                <td>
+                    <!--{{ settings.JIRA_URL }}-->
+                    <a href="{{ jira_server }}/browse/{{ issue.key }}" 
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="jira-issue-link">
+                        {{ issue.key }}
+                    </a>
+                </td>
                 <td>{{ issue.fields.summary }}</td>
                 <td>{{ issue.fields.status.name }}</td>
                 <td>{{ issue.fields.assignee.displayName|default:"Unassigned" }}</td>
@@ -36,5 +45,8 @@
             {% endfor %}
         </tbody>
     </table>
+{% else %}
+    <p>No issues found.</p>
 {% endif %}
+
 {% endblock %}

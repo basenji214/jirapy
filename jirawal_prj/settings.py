@@ -143,4 +143,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 JIRA_SERVER = config('JIRA_SERVER')
 JIRA_USERNAME = config('JIRA_USERNAME')
 JIRA_API_TOKEN = config('JIRA_API_TOKEN')
+JIRA_URL = 'https://basenji.atlassian.net'
 

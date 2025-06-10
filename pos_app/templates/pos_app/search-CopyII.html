@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Jira Issues</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="jql">JQL Query:</label>
+        <input type="text" class="form-control" id="jql" name="jql" 
+               placeholder="e.g. project=PROJ AND status='In Progress'" 
+               value="{{ request.POST.jql }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if issues %}
+    <h2>Search Results</h2>
+    {% for issue in issues %}
+        {{ issue.key }}
+        {{ issue.fields.summary }}
+        {{ issue.fields.status.name }}
+        {{ issue.fields.assignee.displayName|default:"Unassigned" }}
+    {% endfor %}
+{% endif %}
+{% endblock %}
